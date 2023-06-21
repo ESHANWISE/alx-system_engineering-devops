@@ -1,22 +1,28 @@
-# Load balancer 
-### Issue Summary
-From 7.45 AM to 9.24 AM GMT,request to all our web pages returned a 404 Error. That is, we had no access to our backend servers. 100% of our users where affected and could not access any of our product on our platforms. Following further investigation, we discovered that our load balancer had shorted out due to heavy rains that caused power outage.
-### Timeline
-- 7.45 AM: Power outage.
-- 7.46 AM: Backup Generator kicks in.
-- 8.00 AM: After servers bootup, load balancer went off
-- 8.00 AM: Pager alerted teams
-- 8.20 AM: Redireted requests directly to the servers
-- 8.40 AM: Server restarts begin
-- 9.24 AM: 100% of traffic back online
-### Root Cause
-At 7.45 AM, heavy rains caused power outage which caused our power box to catch fire. Since our load balancer was one of the devices that was not protected by a surge protector, it just shut off.
-### Resolution and recovery
-Our monitoring systems alerted our engineers at 8:00 AM GMT, and they investigated and quickly escalated the issue.
-Since we had three servers and one load balancer we configered one of the servers to act as a Load balancer as we plan to acquire new servers and hardware load balancers.
-At 8.40 AM we restarted the new configured load balancer and users could now access the web application.
-### Corrective and Preventative Measures
-These are measures taken to prevent recurrence and improve response times:
-- Add load balancers to solve the issue of single point of failer
-- Ensure that all electrical devices are protected using a surge protectors
+Postmortem: Resolving ID Type Casting and Enhancing Search Functionality
+Issue Summary:
+Duration: Estimated 3 weeks ago
+Impact: The search functionality was affected, resulting in incorrect search results and limited accessibility. Additionally, an ID type casting issue caused inconsistencies in the system. Approximately 20% of the users were affected by these issues.
+Timeline:
+Issue Detected: The ID type casting issue was identified during routine testing and QA checks, while the search functionality issue was reported by users experiencing incorrect search results and limited accessibility.
+Actions Taken: As the assigned developer, I took the initiative to investigate both issues and reviewed the codebase.
+Misleading Investigation/Debugging Paths: Initially, I focused on optimizing the search algorithm and database queries, assuming that performance was the root cause of the search functionality issue. However, the issue persisted despite the optimizations. Meanwhile, I also investigated the ID type casting issue, realizing that it was unrelated to the search functionality problem.
+Escalation: I escalated the incidents to senior developers and the product manager, providing detailed findings and seeking their guidance for resolution.
+Root Cause Analysis: Upon further investigation, I discovered that the ID type casting issue was caused by an incorrect conversion of the ID from a string to a number. Simultaneously, I determined that the search functionality issue was caused by inadequate state management.
+Resolution: To fix the ID type casting issue, I corrected the type conversion logic, ensuring the ID remained as a string throughout the system. For the search functionality, I adjusted the state management to a higher-level component to enhance accessibility and ensure consistent search results.
+Root Cause and Resolution:
+The root cause of the ID type casting issue was the incorrect conversion of the ID from a string to a number during data processing, resulting in inconsistencies in the system. The search functionality issue, on the other hand, was caused by inadequate state management, leading to limited accessibility and inconsistent search results.
+To resolve the ID type casting issue, I corrected the type conversion logic, ensuring the ID remained as a string throughout the data processing, thus eliminating the inconsistencies.
+For the search functionality issue, I adjusted the state management to a higher-level component, enabling improved accessibility and ensuring consistent search results across relevant components.
+Corrective and Preventative Measures:
+Improve Data Type Handling: Enforce strict data type validation and handling throughout the system to prevent similar type casting issues in the future.
+Code Review and Documentation: Implement regular code reviews to identify and rectify potential issues related to data type handling. Update the documentation to include guidelines on proper data type handling and input validation.
+Comprehensive Testing: Develop comprehensive test cases for the search functionality, covering various scenarios and data types to validate the accuracy and accessibility of search results.
+Knowledge Sharing: Share the lessons learned and best practices with the development team to enhance their understanding of data type handling and state management.
+Tasks to Address the Issues:
+Review and update the code responsible for the ID type casting, ensuring correct data type handling.
+Conduct thorough testing of the search functionality to validate the accuracy and accessibility of search results.
+Update the documentation to include guidelines for proper data type handling and state management.
+By implementing these measures, we aim to prevent similar ID type casting issues, enhance the search functionality, and improve the overall reliability and user experience of the system.
+This postmortem provides insights into the ID type casting issue and the search functionality issue, along with the steps taken to resolve them. It highlights the proactive approach and problem-solving skills demonstrated by the developer in addressing these issues.
+
 
